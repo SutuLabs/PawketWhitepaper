@@ -17,7 +17,7 @@ With Pawket Light Server, even dusted accounts can get balance instantly, thanks
 The data stored in Analytic DB is like this:
 (almost the same to the Chia SQLite DB)
 
-::: mermaid
+```mermaid
 erDiagram
     sync_coin_record {
         bigint id PK
@@ -36,7 +36,8 @@ erDiagram
         bytea hint
     }
     sync_coin_record }o--o{ sync_hint_record : coin_name
-:::
+    sync_coin_record }o--|{ sync_coin_record : coin_parent
+```
 
 
 ## Web Client
