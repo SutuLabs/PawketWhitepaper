@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Risk Mitigation Strategies - Pawket Security White Paper</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Cover.html"><strong aria-hidden="true">1.</strong> Cover</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="Introduction.html"><strong aria-hidden="true">2.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="Architecture.html"><strong aria-hidden="true">3.</strong> Application Architecture</a></li><li class="chapter-item expanded "><a href="Principles.html"><strong aria-hidden="true">4.</strong> General Security Principles</a></li><li class="chapter-item expanded "><a href="Mitigation.html" class="active"><strong aria-hidden="true">5.</strong> Risk Mitigation Strategies</a></li><li class="chapter-item expanded "><a href="Attack.html"><strong aria-hidden="true">6.</strong> Impact on Potential Attack Scenarios</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="About.html"><strong aria-hidden="true">7.</strong> About Us</a></li><li class="chapter-item expanded "><a href="BackCover.html"><strong aria-hidden="true">8.</strong> Back Cover</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Pawket Security White Paper</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="risks-mitigation-strategies"><a class="header" href="#risks-mitigation-strategies">Risks Mitigation Strategies</a></h1>
+<h2 id="offline-mode"><a class="header" href="#offline-mode">Offline mode</a></h2>
+<p>The most important risk mitigation strategy is offline mode. Pawket can fully work in offline mode with degraded function. Only signing is allowed in this mode. The communication between offline devices and blockchain is through the QR code.</p>
+<h2 id="fingerprint"><a class="header" href="#fingerprint">Fingerprint</a></h2>
+<p>Mnemonics and Account fingerprints are fully compatible with Official Chia Wallet.</p>
+<h2 id="malicious-spend-bundle-discovery"><a class="header" href="#malicious-spend-bundle-discovery">Malicious Spend Bundle Discovery</a></h2>
+<p>When interacting with unfamous dApp, no reputation can be used to prove they are trustful to generate a safe spend bundle. With the coin analysis tool, Pawket can quickly find malicious coins or corrupted spend-bundle and give users a significant warning message.</p>
+<h2 id="coinoffer-analysis"><a class="header" href="#coinoffer-analysis">Coin/Offer Analysis</a></h2>
+<p>Power users are also allowed to analyze coin/offer thoroughly.</p>
+<p>TODO: add analysis UI image</p>
+<h2 id="phishing"><a class="header" href="#phishing">Phishing</a></h2>
+<p>In this attack scenario, an attacker would create a page looking like a regular login page, or inject an additional javascript on a legitimate Pawket page.</p>
+<p>Pawket mitigates this type of attack by using a &quot;reserved security token&quot;. After the user is unlocked with the right password, the user will be welcomed with this &quot;reserved security token&quot;. To prevent an attacker from placing a transparent input dialog on top of the input box, for example, to capture the passphrase, a field focus event displays an additional interaction in place with color changes.</p>
+<h2 id="cross-site-scripting-xss"><a class="header" href="#cross-site-scripting-xss">Cross Site Scripting (XSS)</a></h2>
+<p>High on the list of web application vulnerabilities, an XSS vulnerability would allow an attacker to run arbitrary content on the page.</p>
+<h3 id="persistent-xss"><a class="header" href="#persistent-xss">Persistent XSS</a></h3>
+<p>In this scenario, an attacker would submit malicious data to the server that would then be executed on the page when accessed by another user.</p>
+<p>While Pawket server API would provide textual information and the Chialisp program. We assume it is the responsibility of the clients to treat the server information as hostile and take care of the sanitization.</p>
+<p>In practice, in most cases, this means only rendering the information as text and using escaping facilities provided by the templating libraries used by Pawket (Vue) and template literals.</p>
+<p>One common threat is the execution of the Chialisp program. First, the Chialisp program is designed to be a purely functional programming language, meaning no side effects exist so that no environment would be affected. Second, the Chialisp program would be executed in an iframe sandbox to avoid any possible affection.</p>
+<p>Additionally, Pawket is preventing running inline javascript or including javascript files from third-party domains.</p>
+<h3 id="reflected-xss"><a class="header" href="#reflected-xss">Reflected XSS</a></h3>
+<p>In this scenario, an attacker would craft a link (for example in an email) to run arbitrary code when the user navigates on the Pawket domain.</p>
+<p>In certain cases, Pawket uses parameters provided in URLs. URL parameters are used, for example, to directly launch a send transaction (which allows 3rd party dApp to launch Pawket for sending) or accept an offer.</p>
+<p>The attack surface for reflected XSS is reduced by running validation on the requested content, for example, the address of send target would be decoded by bech32m first, and the Chialisp program executes in the iframe sandbox.</p>
+<h3 id="unsafe-methods"><a class="header" href="#unsafe-methods">Unsafe methods</a></h3>
+<p>The execution of javascript <code>eval</code> statements is not allowed.</p>
+<h3 id="sql-injection"><a class="header" href="#sql-injection">SQL Injection</a></h3>
+<p>The server-side application seldom uses direct SQL queries but instead accesses the data through the framework ORM. By default, these database abstraction layers prevent most SQL injection issues. User input used by the ORM is always carefully validated. The remaining risks are mitigated using code reviews.</p>
+<h3 id="file-upload"><a class="header" href="#file-upload">File upload</a></h3>
+<p>File upload is another sensitive area for web applications. Pawket at the moment only supports offer upload. The offer file size limit can be controlled by the administrator using the webserver environment variables.</p>
+<h3 id="csrf"><a class="header" href="#csrf">CSRF</a></h3>
+<p>Cross-Site Request Forgery is an attack scenario where a user's action on a malicious third-party site would trigger a modification of data on a website, such as editing a resource or deleting it, crafting a malicious image URL, or having the user submit a form from another domain.</p>
+<p>The Pawket server is stateless and authenticate-less, so no one can launch such an attack on the Pawket server.</p>
+<h3 id="recovery-risks"><a class="header" href="#recovery-risks">Recovery risks</a></h3>
+<p>To recover an account a user must import their mnemonics and optional the accounts to regain access to their accounts. This process makes an attack scenario quite complicated but reduces the usability for the end user by introducing chances of losing access to the account permanently if the mnemonics are lost.</p>
+<h3 id="source-control"><a class="header" href="#source-control">Source Control</a></h3>
+<p>Pawket utilizes git for source control, and Azure DevOps for fully automated CI/CD. Both codes in client and server have an adequate level of coverage. Tests are forced during the continuous integration process.</p>
+<p>For every release, digital signatures are published to help the end-user or enterprise administrator ensure the integrity of each release.</p>
+<p>Only a small amount of people are responsible and allowed to publish code. Before being pushed on a sensitive branch, each pull request is therefore reviewed and validated by different maintainers.</p>
+<h3 id="bug-bounty"><a class="header" href="#bug-bounty">Bug bounty</a></h3>
+<p>When we have a sponsor, we will run a bug bounty program to further increase the security level.</p>
+<!-- ### 3rd Party Audits -->
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="Principles.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="Attack.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="Principles.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="Attack.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="mermaid.min.js"></script>
+        <script type="text/javascript" src="mermaid-init.js"></script>
+
+
+    </body>
+</html>
