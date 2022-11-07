@@ -8,7 +8,7 @@ Some knowledge about the different layers of the application is needed to better
 
 Pawket clients connect to the Light server by default, which provides a quick response without needing to synchronize the whole/selective blockchain.
 
-The Light Server and the Syncer are developed in .Net Core 6.0, following the standard API design pattern. This server application relies on a Postgresql database, which cache and calculates the balance for clients.
+The Light Server and the Syncer are developed in .Net 6.0, following the standard API design pattern. This server application relies on a Postgresql database, which cache and calculates the balance for clients.
 
 Pawket clients are also allowed to connect to Full Node RPC, which could permit the client to connect to their trust Node to avoid API attacks. However, it could lose the benefit of the ability to get the balance quickly. 
 
