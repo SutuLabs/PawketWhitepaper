@@ -12,18 +12,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      # - uses: actions-rs/toolchain@v1
-      #   with:
-      #     toolchain: stable
       - name: rust-cargo-install
         uses: actions-rs/install@v0.1.2
+        with:
+          crate: mdbook-mermaid
+          version: latest
 
       - name: Setup mdBook
         uses: peaceiris/actions-mdbook@v1
         with:
           mdbook-version: '0.4.21'
 
-      - run: cargo install mdbook-mermaid
       - run: mdbook build && mdbook test
 
       - uses: JamesIves/github-pages-deploy-action@4.1.7
