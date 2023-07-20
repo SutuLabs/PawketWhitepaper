@@ -160,6 +160,44 @@ because they are indeed different generation process.</p>
 <li>Comply with BIP39, Pawket implements <strong>Shadow Wallet</strong> with greatest possible compatibility.</li>
 <li>Comply with BIP39, Pawket supports non-english mnemonic words naively.</li>
 </ul>
+<h2 id="encryption"><a class="header" href="#encryption">Encryption</a></h2>
+<p>Pawket utilized the Chia's BLS curve(BLS12-381) and ECDH mechanism to create encryption algorithm, allow user to encrypt message with recipient's address, which only the recipient have ability to decrypt the message, just like the asymmetric encryption did.</p>
+<p>With this mechanism, created a good user experience to send message to arbitrary activated address without communication or setup beforehand.</p>
+<p>Here are notions:</p>
+<ul>
+<li><strong>Synthetic Key</strong>: which is unique for each address in your wallet, it represents a synthetic child key of your root key. </li>
+<li><strong>Synthetic Public Key</strong>: <code>spk</code>, the public part of synthetic key, can be calculate from synthetic private key and it is on-chain for every standard xch transaction.</li>
+<li><strong>Synthetic Private Key</strong>: <code>ssk</code>, the private part of synthetic key, only the private key owner can calculate this key, can be used to decrypt message encrypted by synthetic public key.</li>
+<li><strong>Activated Address</strong>: address with at least one coin is spent, that is one coin is sent from this address, and the <code>spk</code> was recorded on-chain.</li>
+</ul>
+<p>Following is the procedure during encryption and decryption.</p>
+<pre class="mermaid">sequenceDiagram
+    participant C as Chia Blockchain
+    participant A as Alice
+    participant B as Bob
+    C -&gt;&gt; A: ❶ spk_B
+    A-&gt;&gt;A: ❷ shared = ssk_A * spk_B
+    A-&gt;&gt;B: ❸ spk_A, encrypted = enc(plain, shared)
+    B-&gt;&gt;B: ❺ shared = ssk_B * spk_A,&lt;br/&gt; plain = dec(encrypted, shared)
+</pre>
+<ul>
+<li>❶ Get Bob's <code>spk</code> from Blockchain, which requires activated address.</li>
+<li>❷ Calculate the shared key according to ECDH.</li>
+<li>❸ Send the encrypted message and Alice's <code>spk</code>.</li>
+<li>❹ Calculate the shared key by Bob's <code>ssk</code> and Alice's <code>spk</code> according to ECDH, then decrypted the message.</li>
+</ul>
+<p><strong>Demonstration</strong></p>
+<p>Following is a demo of composite encrypted message:</p>
+<pre><code class="language-text">-------- pawket.xch ---------
+Sender Address: xch1ahu8zdwg03qadmk4tan653hxdjy596k6dy63wm0r6etj0g0y5uws4jwntt
+Receiver Address: xch16xwqtf2d4jljks8lfpp4xnz8jak7jqjxc07y9tqlgt4grdp5hr4q7vcx3s
+Encrypted Message: fd8ccb693c60e1ba3281c0d1a66c8539a537de6365ca685545052842626a5a1c
+</code></pre>
+<ul>
+<li><strong>Sender Address</strong>: from this address, program can find the <code>spk_A</code> from blockchain.</li>
+<li><strong>Receiver Address</strong>: from this address, program can find the <code>ssk_B</code> from wallet.</li>
+<li><strong>Encrypted Message</strong>: with shared key calculated by ECDH, the message can be decrypted.</li>
+</ul>
 
                     </main>
 
