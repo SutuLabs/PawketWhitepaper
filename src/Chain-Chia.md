@@ -71,7 +71,7 @@ sequenceDiagram
 
 Following is a demo of composite encrypted message:
 
-```
+```text
 -------- pawket.xch ---------
 Sender Address: xch1ahu8zdwg03qadmk4tan653hxdjy596k6dy63wm0r6etj0g0y5uws4jwntt
 Receiver Address: xch16xwqtf2d4jljks8lfpp4xnz8jak7jqjxc07y9tqlgt4grdp5hr4q7vcx3s
