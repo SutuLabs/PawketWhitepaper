@@ -81,3 +81,5 @@ Encrypted Message: fd8ccb693c60e1ba3281c0d1a66c8539a537de6365ca685545052842626a5
 - **Sender Address**: from this address, program can find the `spk_A` from blockchain.
 - **Receiver Address**: from this address, program can find the `ssk_B` from wallet.
 - **Encrypted Message**: with shared key calculated by ECDH, the message can be decrypted.
+
+**Note**: you can also refer to the [source code](https://github.com/SutuLabs/Pawket/blob/master/packages/pawket-chia-lib/services/crypto/ecdh.ts).
