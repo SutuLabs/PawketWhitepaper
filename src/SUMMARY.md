@@ -13,6 +13,7 @@
 - [Chia](./chia/index.md)
     - [Mnemonic](./chia/mnemonic.md)
     - [Encryption](./chia/encryption.md)
+    - [MultiSig](./chia/multisig.md)
 
 
 # Security
