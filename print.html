@@ -26,6 +26,8 @@
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -76,7 +78,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="Cover.html"><strong aria-hidden="true">1.</strong> Cover</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="Introduction.html"><strong aria-hidden="true">2.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="Architecture.html"><strong aria-hidden="true">3.</strong> Application Architecture</a></li><li class="chapter-item expanded "><a href="Chain.html"><strong aria-hidden="true">4.</strong> Blockchain Specific Design</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Chain-Chia.html"><strong aria-hidden="true">4.1.</strong> Chia</a></li></ol></li><li class="chapter-item expanded "><a href="Principles.html"><strong aria-hidden="true">5.</strong> General Security Principles</a></li><li class="chapter-item expanded "><a href="Mitigation.html"><strong aria-hidden="true">6.</strong> Risk Mitigation Strategies</a></li><li class="chapter-item expanded "><a href="Attack.html"><strong aria-hidden="true">7.</strong> Impact on Potential Attack Scenarios</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="About.html"><strong aria-hidden="true">8.</strong> About Us</a></li><li class="chapter-item expanded "><a href="BackCover.html"><strong aria-hidden="true">9.</strong> Back Cover</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="Cover.html"><strong aria-hidden="true">1.</strong> Cover</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="Introduction.html"><strong aria-hidden="true">2.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="Architecture.html"><strong aria-hidden="true">3.</strong> Application Architecture</a></li><li class="chapter-item expanded affix "><li class="part-title">Blockchain Specific Design</li><li class="chapter-item expanded "><a href="chia/index.html"><strong aria-hidden="true">4.</strong> Chia</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chia/mnemonic.html"><strong aria-hidden="true">4.1.</strong> Mnemonic</a></li><li class="chapter-item expanded "><a href="chia/encryption.html"><strong aria-hidden="true">4.2.</strong> Encryption</a></li><li class="chapter-item expanded "><a href="chia/multisig.html"><strong aria-hidden="true">4.3.</strong> MultiSig</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="Principles.html"><strong aria-hidden="true">5.</strong> General Security Principles</a></li><li class="chapter-item expanded "><a href="Mitigation.html"><strong aria-hidden="true">6.</strong> Risk Mitigation Strategies</a></li><li class="chapter-item expanded "><a href="Attack.html"><strong aria-hidden="true">7.</strong> Impact on Potential Attack Scenarios</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="About.html"><strong aria-hidden="true">8.</strong> About Us</a></li><li class="chapter-item expanded "><a href="BackCover.html"><strong aria-hidden="true">9.</strong> Back Cover</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -197,11 +199,10 @@ The solution should propose sane security settings by default. A power user can 
 <h2 id="cli"><a class="header" href="#cli">CLI</a></h2>
 <p>The <code>Coin Manipulator</code> can be reused to support CLI manipulation.</p>
 <p>As Web Client is written in Typescript (a dialect of Javascript), it can be easily migrated to run in CLI with nodejs.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="blockchain-specific-design"><a class="header" href="#blockchain-specific-design">Blockchain Specific Design</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="chia"><a class="header" href="#chia">Chia</a></h1>
 <p>Pawket is initially designed to serving Chia Network, however, the internal design is aim to be an universal blockchain account manager.
 We will describe chain specific design in this section.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="chia"><a class="header" href="#chia">Chia</a></h1>
-<h2 id="mnemonic"><a class="header" href="#mnemonic">Mnemonic</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mnemonic"><a class="header" href="#mnemonic">Mnemonic</a></h1>
 <p>Pawket's master mnemonic is not compactible with Chia Official Wallet, even we simply allow the length of mnemonic to be 24 words,
 because they are indeed different generation process.</p>
 <p>For Chia Official Wallet, looks like this:</p>
@@ -226,7 +227,7 @@ because they are indeed different generation process.</p>
 <li>Comply with BIP39, Pawket implements <strong>Shadow Wallet</strong> with greatest possible compatibility.</li>
 <li>Comply with BIP39, Pawket supports non-english mnemonic words naively.</li>
 </ul>
-<h2 id="encryption"><a class="header" href="#encryption">Encryption</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="encryption"><a class="header" href="#encryption">Encryption</a></h1>
 <p>Pawket utilized the Chia's BLS curve(BLS12-381) and ECDH mechanism to create encryption algorithm, allow user to encrypt message with recipient's address, which only the recipient have ability to decrypt the message, just like the asymmetric encryption did.</p>
 <p>With this mechanism, created a good user experience to send message to arbitrary activated address without communication or setup beforehand.</p>
 <p>Here are notions:</p>
@@ -265,6 +266,78 @@ Encrypted Message: fd8ccb693c60e1ba3281c0d1a66c8539a537de6365ca685545052842626a5
 <li><strong>Encrypted Message</strong>: with shared key calculated by ECDH, the message can be decrypted.</li>
 </ul>
 <p><strong>Note</strong>: you can also refer to the <a href="https://github.com/SutuLabs/Pawket/blob/master/packages/pawket-chia-lib/services/crypto/ecdh.ts">source code</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="multisig-mpc-wallet"><a class="header" href="#multisig-mpc-wallet">MultiSig (MPC) Wallet</a></h1>
+<h2 id="our-solution-bls-aggregation"><a class="header" href="#our-solution-bls-aggregation">Our Solution: BLS Aggregation</a></h2>
+<p>Our solution leverages BLS aggregation, which is compatible with the <code>p2_delegated_puzzle_or_hidden_puzzle</code>, the most important smart contract in Chia. This approach combines the efficiency and security of BLS signatures with the robust infrastructure of Chia's ecosystem.</p>
+<p>However, it is crucial to address potential vulnerabilities, especially the <strong>Rogue Public Key Attack</strong>. To mitigate such risks, users must generate their public keys independently to prevent potential forgery. The security of this scheme relies heavily on truly independent key generation processes and proper management of synthetic keys, which are critical for maintaining overall security.</p>
+<h2 id="technical-definition-and-security-analysis"><a class="header" href="#technical-definition-and-security-analysis">Technical Definition and Security Analysis</a></h2>
+<h3 id="mathematical-definition"><a class="header" href="#mathematical-definition">Mathematical Definition</a></h3>
+<p>A multisig scheme using BLS aggregation consists of four main functions: <strong>generate</strong>, <strong>sign</strong>, <strong>aggregate</strong>, and <strong>verify</strong>.</p>
+<h4 id="key-generation"><a class="header" href="#key-generation">Key Generation</a></h4>
+<ol>
+<li>Each participant generates a random private key: \( x_1, x_2 \in (0,r) \)</li>
+<li>Public keys are derived: \( P_1 = g^{x_1}, P_2 = g^{x_2} \in \mathbb{G}_1 \)</li>
+<li>Aggregated public key is calculated: \( P_a = g^{x_1} + g^{x_2} \in \mathbb{G}_1 \)</li>
+<li>Synthetic private key is derived: \( x_s = H(P_a) \in \mathbb{F}_r \)</li>
+<li>Synthetic public key is calculated: \( P_s = g^{x_s} + P_a \)</li>
+</ol>
+<h4 id="signing-process"><a class="header" href="#signing-process">Signing Process</a></h4>
+<p>Given private keys \( x_1, x_2 \) and a message \( m \), the signature is computed by:</p>
+<ol>
+<li>Hash the message and synthetic public key: \( h = H(m, P_s) \)</li>
+<li>Generate three signatures:
+<ul>
+<li>\( \sigma_s = h^{x_s} \in \mathbb{G}_2 \)</li>
+<li>\( \sigma_1 = h^{x_1} \)</li>
+<li>\( \sigma_2 = h^{x_2} \)</li>
+</ul>
+</li>
+</ol>
+<h4 id="signature-aggregation"><a class="header" href="#signature-aggregation">Signature Aggregation</a></h4>
+<p>The signatures are aggregated as: \( \sigma = \sigma_s + \sigma_1 + \sigma_2 \)</p>
+<h4 id="verification"><a class="header" href="#verification">Verification</a></h4>
+<p>The signature \( \sigma \) is verified by checking: \( e(g, \sigma) = e(P_s, h) \)</p>
+<blockquote>
+<p>This can be expanded as:</p>
+<p>\[ e(g, \sigma) = e(P_s, h) \]</p>
+<p>\[ e(g, \sigma_s + \sigma_1 + \sigma_2) = e(g^{x_s} + g^{x_1} + g^{x_2}, h) \]</p>
+<p>\[ e(g, h^{x_s+x_1+x_2}) = e(g^{x_s + x_1 + x_2}, h) \]</p>
+<p>\[ e(g, h) = e(g, h) \]</p>
+</blockquote>
+<h3 id="security-analysis-and-considerations"><a class="header" href="#security-analysis-and-considerations">Security Analysis and Considerations</a></h3>
+<h4 id="rogue-public-key-attack"><a class="header" href="#rogue-public-key-attack">Rogue Public Key Attack</a></h4>
+<p>In this attack, an adversary could register a public key \( P_2 = g^{x'_2} - P_1 \in \mathbb{G}_1 \), where \( x'_2 \) is carefully chosen by the attacker. The synthetic public key would then be \( P_s = g^{x_s} + P_1 + P_2 = g^{x_s} + P_1 + g^{x'_2} - P_1 = g^{x_s} + g^{x'_2} \). The attacker could then forge an aggregate signature \( \sigma = \sigma_s + \sigma_2 \) that would pass verification.</p>
+<h4 id="mitigation-strategies"><a class="header" href="#mitigation-strategies">Mitigation Strategies</a></h4>
+<ol>
+<li><strong>Independent Key Generation</strong>: Ensure that both parties generate their private keys independently.</li>
+<li><strong>Commit-and-Open Approach</strong>: Both parties first provide a hash of their public key before revealing the actual public key.</li>
+<li><strong>Proof of Possession</strong>: Require each participant to prove possession of their private key.</li>
+</ol>
+<h2 id="related-approaches"><a class="header" href="#related-approaches">Related Approaches</a></h2>
+<h3 id="1-custody-tool"><a class="header" href="#1-custody-tool">1. Custody Tool</a></h3>
+<p>The Custody Tool provided by Chia Network offers a comprehensive solution for managing digital assets but is considered too heavy and complex for our specific use case. It provides advanced features for institutional custody but introduces unnecessary complexity for our implementation.</p>
+<p>Reference: <a href="https://docs.chia.net/custody-tool/">Chia Custody Tool Documentation</a></p>
+<h3 id="2-bls-aggregation-for-threshold-signature"><a class="header" href="#2-bls-aggregation-for-threshold-signature">2. BLS Aggregation for Threshold Signature</a></h3>
+<p>BLS threshold signatures allow for a flexible m-of-n signature scheme. In a \( m \)/\( n \) threshold signature scheme, \( m \) participants must contribute to create a valid signature.</p>
+<p>The key generation process involves:</p>
+<ol>
+<li>Each participant generates their private key</li>
+<li>Public keys are calculated individually</li>
+<li>An aggregate public key is derived by combining individual public keys</li>
+</ol>
+<p>While this approach offers flexibility, the method currently lacks maturity and may not yet be fully reliable for all use cases.</p>
+<p>References:</p>
+<ul>
+<li><a href="https://crypto.stanford.edu/%7Edabo/pubs/papers/BLSmultisig.html">BLS Multi-Signatures With Public-Key Aggregation</a></li>
+<li><a href="https://muens.io/bls-signature-aggregation">BLS Signature Aggregation</a></li>
+<li><a href="https://csrc.nist.gov/presentations/2023/mpts2023-day1-talk-threshold-BLS">Exploring the power of threshold BLS</a></li>
+<li><a href="https://www.jcraige.com/threshold-bls-signatures">Threshold BLS Signatures</a></li>
+<li><a href="https://geeklaunch.io/blog/understanding-elliptic-curves-pairings-bls-signatures/">Path to understanding: elliptic curves, pairings, and BLS signatures</a></li>
+<li><a href="https://alinush.github.io/2020/03/12/scalable-bls-threshold-signatures.html">Fast and Scalable BLS Threshold Signatures</a></li>
+</ul>
+<h3 id="3-p2_m_of_n_delegate_direct"><a class="header" href="#3-p2_m_of_n_delegate_direct">3. p2_m_of_n_delegate_direct</a></h3>
+<p>This approach provides a more generalized m-of-n multisignature scheme, allowing for flexible threshold requirements. It extends the functionality beyond the 2/2 case to support scenarios where only a subset of signers is required. However, it requires specific smart contract of coin, which is not compactible with the main-stream coins - <code>p2_delegated_puzzle_or_hidden_puzzle</code>.</p>
+<p>Reference: <a href="https://github.com/Chia-Network/chia-blockchain/blob/main/chia/wallet/puzzles/p2_m_of_n_delegate_direct.clsp">Chia GitHub Repository</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="general-security-principles"><a class="header" href="#general-security-principles">General Security Principles</a></h1>
 <h2 id="user-master-password"><a class="header" href="#user-master-password">User Master Password</a></h2>
 <p>Used to decrypt local data containing the user data.</p>
@@ -412,7 +485,9 @@ Encrypted Message: fd8ccb693c60e1ba3281c0d1a66c8539a537de6365ca685545052842626a5
         <script type="text/javascript" src="mermaid-init.js"></script>
         <script type="text/javascript">
         window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
         });
         </script>
     </body>

@@ -1,0 +1,252 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>MultiSig - Pawket Security White Paper</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../Cover.html"><strong aria-hidden="true">1.</strong> Cover</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../Introduction.html"><strong aria-hidden="true">2.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../Architecture.html"><strong aria-hidden="true">3.</strong> Application Architecture</a></li><li class="chapter-item expanded affix "><li class="part-title">Blockchain Specific Design</li><li class="chapter-item expanded "><a href="../chia/index.html"><strong aria-hidden="true">4.</strong> Chia</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chia/mnemonic.html"><strong aria-hidden="true">4.1.</strong> Mnemonic</a></li><li class="chapter-item expanded "><a href="../chia/encryption.html"><strong aria-hidden="true">4.2.</strong> Encryption</a></li><li class="chapter-item expanded "><a href="../chia/multisig.html" class="active"><strong aria-hidden="true">4.3.</strong> MultiSig</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="../Principles.html"><strong aria-hidden="true">5.</strong> General Security Principles</a></li><li class="chapter-item expanded "><a href="../Mitigation.html"><strong aria-hidden="true">6.</strong> Risk Mitigation Strategies</a></li><li class="chapter-item expanded "><a href="../Attack.html"><strong aria-hidden="true">7.</strong> Impact on Potential Attack Scenarios</a></li><li class="spacer"></li><li class="chapter-item expanded "><a href="../About.html"><strong aria-hidden="true">8.</strong> About Us</a></li><li class="chapter-item expanded "><a href="../BackCover.html"><strong aria-hidden="true">9.</strong> Back Cover</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Pawket Security White Paper</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="multisig-mpc-wallet"><a class="header" href="#multisig-mpc-wallet">MultiSig (MPC) Wallet</a></h1>
+<h2 id="our-solution-bls-aggregation"><a class="header" href="#our-solution-bls-aggregation">Our Solution: BLS Aggregation</a></h2>
+<p>Our solution leverages BLS aggregation, which is compatible with the <code>p2_delegated_puzzle_or_hidden_puzzle</code>, the most important smart contract in Chia. This approach combines the efficiency and security of BLS signatures with the robust infrastructure of Chia's ecosystem.</p>
+<p>However, it is crucial to address potential vulnerabilities, especially the <strong>Rogue Public Key Attack</strong>. To mitigate such risks, users must generate their public keys independently to prevent potential forgery. The security of this scheme relies heavily on truly independent key generation processes and proper management of synthetic keys, which are critical for maintaining overall security.</p>
+<h2 id="technical-definition-and-security-analysis"><a class="header" href="#technical-definition-and-security-analysis">Technical Definition and Security Analysis</a></h2>
+<h3 id="mathematical-definition"><a class="header" href="#mathematical-definition">Mathematical Definition</a></h3>
+<p>A multisig scheme using BLS aggregation consists of four main functions: <strong>generate</strong>, <strong>sign</strong>, <strong>aggregate</strong>, and <strong>verify</strong>.</p>
+<h4 id="key-generation"><a class="header" href="#key-generation">Key Generation</a></h4>
+<ol>
+<li>Each participant generates a random private key: \( x_1, x_2 \in (0,r) \)</li>
+<li>Public keys are derived: \( P_1 = g^{x_1}, P_2 = g^{x_2} \in \mathbb{G}_1 \)</li>
+<li>Aggregated public key is calculated: \( P_a = g^{x_1} + g^{x_2} \in \mathbb{G}_1 \)</li>
+<li>Synthetic private key is derived: \( x_s = H(P_a) \in \mathbb{F}_r \)</li>
+<li>Synthetic public key is calculated: \( P_s = g^{x_s} + P_a \)</li>
+</ol>
+<h4 id="signing-process"><a class="header" href="#signing-process">Signing Process</a></h4>
+<p>Given private keys \( x_1, x_2 \) and a message \( m \), the signature is computed by:</p>
+<ol>
+<li>Hash the message and synthetic public key: \( h = H(m, P_s) \)</li>
+<li>Generate three signatures:
+<ul>
+<li>\( \sigma_s = h^{x_s} \in \mathbb{G}_2 \)</li>
+<li>\( \sigma_1 = h^{x_1} \)</li>
+<li>\( \sigma_2 = h^{x_2} \)</li>
+</ul>
+</li>
+</ol>
+<h4 id="signature-aggregation"><a class="header" href="#signature-aggregation">Signature Aggregation</a></h4>
+<p>The signatures are aggregated as: \( \sigma = \sigma_s + \sigma_1 + \sigma_2 \)</p>
+<h4 id="verification"><a class="header" href="#verification">Verification</a></h4>
+<p>The signature \( \sigma \) is verified by checking: \( e(g, \sigma) = e(P_s, h) \)</p>
+<blockquote>
+<p>This can be expanded as:</p>
+<p>\[ e(g, \sigma) = e(P_s, h) \]</p>
+<p>\[ e(g, \sigma_s + \sigma_1 + \sigma_2) = e(g^{x_s} + g^{x_1} + g^{x_2}, h) \]</p>
+<p>\[ e(g, h^{x_s+x_1+x_2}) = e(g^{x_s + x_1 + x_2}, h) \]</p>
+<p>\[ e(g, h) = e(g, h) \]</p>
+</blockquote>
+<h3 id="security-analysis-and-considerations"><a class="header" href="#security-analysis-and-considerations">Security Analysis and Considerations</a></h3>
+<h4 id="rogue-public-key-attack"><a class="header" href="#rogue-public-key-attack">Rogue Public Key Attack</a></h4>
+<p>In this attack, an adversary could register a public key \( P_2 = g^{x'_2} - P_1 \in \mathbb{G}_1 \), where \( x'_2 \) is carefully chosen by the attacker. The synthetic public key would then be \( P_s = g^{x_s} + P_1 + P_2 = g^{x_s} + P_1 + g^{x'_2} - P_1 = g^{x_s} + g^{x'_2} \). The attacker could then forge an aggregate signature \( \sigma = \sigma_s + \sigma_2 \) that would pass verification.</p>
+<h4 id="mitigation-strategies"><a class="header" href="#mitigation-strategies">Mitigation Strategies</a></h4>
+<ol>
+<li><strong>Independent Key Generation</strong>: Ensure that both parties generate their private keys independently.</li>
+<li><strong>Commit-and-Open Approach</strong>: Both parties first provide a hash of their public key before revealing the actual public key.</li>
+<li><strong>Proof of Possession</strong>: Require each participant to prove possession of their private key.</li>
+</ol>
+<h2 id="related-approaches"><a class="header" href="#related-approaches">Related Approaches</a></h2>
+<h3 id="1-custody-tool"><a class="header" href="#1-custody-tool">1. Custody Tool</a></h3>
+<p>The Custody Tool provided by Chia Network offers a comprehensive solution for managing digital assets but is considered too heavy and complex for our specific use case. It provides advanced features for institutional custody but introduces unnecessary complexity for our implementation.</p>
+<p>Reference: <a href="https://docs.chia.net/custody-tool/">Chia Custody Tool Documentation</a></p>
+<h3 id="2-bls-aggregation-for-threshold-signature"><a class="header" href="#2-bls-aggregation-for-threshold-signature">2. BLS Aggregation for Threshold Signature</a></h3>
+<p>BLS threshold signatures allow for a flexible m-of-n signature scheme. In a \( m \)/\( n \) threshold signature scheme, \( m \) participants must contribute to create a valid signature.</p>
+<p>The key generation process involves:</p>
+<ol>
+<li>Each participant generates their private key</li>
+<li>Public keys are calculated individually</li>
+<li>An aggregate public key is derived by combining individual public keys</li>
+</ol>
+<p>While this approach offers flexibility, the method currently lacks maturity and may not yet be fully reliable for all use cases.</p>
+<p>References:</p>
+<ul>
+<li><a href="https://crypto.stanford.edu/%7Edabo/pubs/papers/BLSmultisig.html">BLS Multi-Signatures With Public-Key Aggregation</a></li>
+<li><a href="https://muens.io/bls-signature-aggregation">BLS Signature Aggregation</a></li>
+<li><a href="https://csrc.nist.gov/presentations/2023/mpts2023-day1-talk-threshold-BLS">Exploring the power of threshold BLS</a></li>
+<li><a href="https://www.jcraige.com/threshold-bls-signatures">Threshold BLS Signatures</a></li>
+<li><a href="https://geeklaunch.io/blog/understanding-elliptic-curves-pairings-bls-signatures/">Path to understanding: elliptic curves, pairings, and BLS signatures</a></li>
+<li><a href="https://alinush.github.io/2020/03/12/scalable-bls-threshold-signatures.html">Fast and Scalable BLS Threshold Signatures</a></li>
+</ul>
+<h3 id="3-p2_m_of_n_delegate_direct"><a class="header" href="#3-p2_m_of_n_delegate_direct">3. p2_m_of_n_delegate_direct</a></h3>
+<p>This approach provides a more generalized m-of-n multisignature scheme, allowing for flexible threshold requirements. It extends the functionality beyond the 2/2 case to support scenarios where only a subset of signers is required. However, it requires specific smart contract of coin, which is not compactible with the main-stream coins - <code>p2_delegated_puzzle_or_hidden_puzzle</code>.</p>
+<p>Reference: <a href="https://github.com/Chia-Network/chia-blockchain/blob/main/chia/wallet/puzzles/p2_m_of_n_delegate_direct.clsp">Chia GitHub Repository</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../chia/encryption.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../Principles.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../chia/encryption.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../Principles.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+    </body>
+</html>
