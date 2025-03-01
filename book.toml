@@ -14,3 +14,6 @@ command = "mdbook-mermaid"
 
 [output.html]
 additional-js = ["mermaid.min.js", "mermaid-init.js"]
+
+[output.html.redirect]
+"/Chain-Chia.html" = "../chia/encryption.html"
